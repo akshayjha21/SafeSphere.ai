@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "SafeSpace Lite",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:3000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.instagram.com/*",
+        "*://*.twitter.com/*",
+        "*://*.facebook.com/*",
+        "*://mail.google.com/*"
+      ],
+      "js": ["contentScript.js"],
+      "css": ["popup.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
