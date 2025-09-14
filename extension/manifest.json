@@ -21,7 +21,8 @@
         "*://mail.google.com/*"
       ],
       "js": ["contentScript.js"],
-      "css": ["popup.css"]
+      "css": ["popup.css"],
+      "run_at": "document_idle"
     }
   ],
   "action": {

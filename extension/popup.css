@@ -10,6 +10,12 @@ body {
 .popup-container {
   text-align: center;
 }
+/* Position icon nicely inside last td of email row */
+.toxicity-status-icon {
+  vertical-align: middle;
+  cursor: default;
+  box-shadow: 0 0 3px rgba(0,0,0,0.4);
+}
 
 h1 {
   font-size: 20px;
