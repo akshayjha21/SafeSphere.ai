@@ -44,7 +44,7 @@ Welcome to our *SafeSphere.AI* project designed to empower women online by provi
 
 1. *Clone the repository:*  
 git clone https://github.com/akshayjha21/SafeSphere.ai.git
-cd women-safety-extension
+cd SafeSphere.ai
 
 text
 
@@ -118,4 +118,5 @@ Contributions and suggestions are welcome! Please open issues or submit pull req
 ---
 
 # Let's make the internet safe for everyone, starting with protecting women online
+
 
