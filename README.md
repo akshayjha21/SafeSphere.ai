@@ -27,8 +27,7 @@ Welcome to our *SafeSphere.AI* project designed to empower women online by provi
 | Image Moderation     | Sightengine API                       | Automated unsafe content detection in images         | 
 | Backend API          | Node.js, Express.js                   | Moderation API & orchestration                       |
 | Caching              | Redis                                 | Fast result caching & reduced repeated processing    |
-| Cloud Storage        | AWS S3 or equivalent                  | Secure storage of flagged content                    |
-| Security             | SHA-256, HTTPS, Token Auth, CORS      | Data security, encryption, and access protection     |
+| Security             | SHA-256,CORS                          | Data security, encryption, and access protection     |
 
 ---
 
@@ -118,5 +117,6 @@ Contributions and suggestions are welcome! Please open issues or submit pull req
 ---
 
 # Let's make the internet safe for everyone, starting with protecting women online
+
 
 
