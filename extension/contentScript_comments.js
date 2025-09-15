@@ -144,7 +144,7 @@ async function moderateCommentElement(commentElem) {
 async function scanCommentsInitial() {
   const comments = Array.from(document.querySelectorAll(
     'div[data-testid="tweetText"] > span.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3'
-  )).slice(0, 5);
+  )).slice(0, 10);
 
   for (const commentElem of comments) {
     if (commentElem.dataset.safespaceLoading === 'true' || commentElem.dataset.safespaceProcessed === 'true') continue;

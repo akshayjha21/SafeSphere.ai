@@ -2,67 +2,91 @@ const MODERATION_API = 'http://127.0.0.1:3000/moderation/analyzeComment';
 
 console.log("SafeSpace Lite content script loaded!");
 
-// Create icon element with color and tooltip
-function createStatusIcon(color, title) {
-  const icon = document.createElement('span');
-  icon.style.display = 'inline-block';
-  icon.style.width = '14px';
-  icon.style.height = '14px';
-  icon.style.borderRadius = '50%';
-  icon.style.backgroundColor = color;
-  icon.style.marginLeft = '8px';
-  icon.title = title;
-  icon.className = 'toxicity-status-icon';
-  return icon;
+// === BADGE HELPERS ===
+
+function createStatusBadge(type) {
+  const badge = document.createElement('span');
+  badge.className = 'toxicity-badge';
+  badge.style.display = 'inline-block';
+  badge.style.verticalAlign = 'middle';
+  badge.style.marginLeft = '9px';
+  badge.style.padding = '2px 10px';
+  badge.style.borderRadius = '14px';
+  badge.style.fontSize = '13px';
+  badge.style.fontWeight = '600';
+  badge.style.letterSpacing = '0.06em';
+  badge.style.boxShadow = '0 2px 7px rgba(44,203,113,0.08)';
+  badge.style.userSelect = 'none';
+  badge.style.transition = 'background 0.19s, box-shadow 0.2s';
+
+  switch (type) {
+    case 'alert':
+      badge.style.background = '#f44336';
+      badge.style.color = '#fff';
+      badge.textContent = '❗ Suspected';
+      badge.title = 'Suspected: Potentially harmful or toxic email';
+      break;
+    case 'warning':
+      badge.style.background = 'linear-gradient(90deg,#ffd600,#ffe082)';
+      badge.style.color = '#333';
+      badge.textContent = '⚠️ Warning';
+      badge.title = 'Warning: Possible risk';
+      break;
+    default:
+      badge.style.background = '#2ecc71';
+      badge.style.color = '#fff';
+      badge.textContent = '✓ Safe';
+      badge.title = 'Safe: No toxicity detected';
+      break;
+  }
+  return badge;
 }
 
-function createLoadingIcon() {
-  const icon = document.createElement('span');
-  icon.className = 'toxicity-loading-icon';
-  icon.style.display = 'inline-block';
-  icon.style.width = '14px';
-  icon.style.height = '14px';
-  icon.style.borderRadius = '50%';
-  icon.style.marginLeft = '8px';
-  icon.style.border = '2px solid #ccc';
-  icon.style.borderTop = '2px solid #333';
-  icon.style.animation = 'spin 1s linear infinite';
-  icon.title = 'Checking for toxicity...';
-  return icon;
+function createLoadingBadge() {
+  const badge = document.createElement('span');
+  badge.className = 'toxicity-badge';
+  badge.style.display = 'inline-block';
+  badge.style.verticalAlign = 'middle';
+  badge.style.marginLeft = '9px';
+  badge.style.padding = '2px 10px';
+  badge.style.borderRadius = '14px';
+  badge.style.fontSize = '13px';
+  badge.style.background = '#ececec';
+  badge.style.color = '#666';
+  badge.textContent = '… Scanning';
+  badge.title = 'Checking for toxicity...';
+  return badge;
 }
 
-// Add keyframes for spinner animation
-const style = document.createElement('style');
-style.innerHTML = `
-@keyframes spin {
-  0% { transform: rotate(0deg);}
-  100% { transform: rotate(360deg);}
-}
-.toxicity-loading-icon {
-  box-sizing: border-box;
-}
-`;
-document.head.appendChild(style);
+// === MAIN LOGIC ===
 
 function updateStatusIcon(row, rating) {
-  let existingIcon = row.querySelector('.toxicity-status-icon, .toxicity-loading-icon');
-  if (existingIcon) {
-    existingIcon.remove();
-  }
+  let existingBadge = row.querySelector('.toxicity-badge');
+  if (existingBadge) existingBadge.remove();
 
-  const color = getColorByRating(rating);
-  const icon = createStatusIcon(color, `Toxicity rating: ${rating}`);
+  let badge;
+  if (rating > 7) {
+    badge = createStatusBadge('alert');
+  } else if (rating > 4) {
+    badge = createStatusBadge('warning');
+  } else {
+    badge = createStatusBadge('safe');
+  }
 
   const lastTd = row.querySelector('td:last-child');
   if (lastTd) {
-    lastTd.appendChild(icon);
+    lastTd.appendChild(badge);
   }
-}
 
-function getColorByRating(rating) {
-  if (rating > 7) return 'red';
-  if (rating > 4) return 'yellow';
-  return 'green';
+  // Blur the row if suspected (rating > 7)
+  if (rating > 7) {
+    row.style.filter = 'blur(2px)';
+    row.style.transition = 'filter 0.2s';
+    row.title = 'This email appears toxic or harmful. Blurred for safety.';
+  } else {
+    row.style.filter = '';
+    row.title = '';
+  }
 }
 
 function extractEmailText(row) {
@@ -71,7 +95,6 @@ function extractEmailText(row) {
   return (subject + ' ' + snippet).trim();
 }
 
-// UTF-8 safe base64 encoding
 function base64EncodeUnicode(str) {
   return btoa(
     encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) =>
@@ -105,29 +128,25 @@ function setCachedResult(text, result) {
 function isCacheValid(data) {
   if (!data || !data.cachedAt) return false;
   const ageMs = Date.now() - data.cachedAt;
-  return ageMs < 300; // 1 day
+  return ageMs < 24 * 60 * 60 * 1000; // 1 day
 }
 
 async function moderateRow(row) {
   const emailText = extractEmailText(row);
   if (!emailText) return;
 
-  // Check client cache
+  // Client cache check
   const cachedData = getCachedResult(emailText);
   if (cachedData && isCacheValid(cachedData)) {
     updateStatusIcon(row, cachedData.result.rating);
     return;
   }
 
-  // Show loading spinner icon
-  let existingIcon = row.querySelector('.toxicity-status-icon, .toxicity-loading-icon');
-  if (existingIcon) {
-    existingIcon.remove();
-  }
+  // Show loading badge
+  let existingBadge = row.querySelector('.toxicity-badge');
+  if (existingBadge) existingBadge.remove();
   const lastTd = row.querySelector('td:last-child');
-  if (lastTd) {
-    lastTd.appendChild(createLoadingIcon());
-  }
+  if (lastTd) lastTd.appendChild(createLoadingBadge());
 
   try {
     const res = await fetch(MODERATION_API, {
@@ -153,32 +172,44 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Sequentially scan and moderate emails (limit 5 emails per scan)
 async function scanInboxSequential() {
-  const rows = Array.from(document.querySelectorAll('tr.zA')).slice(0, 5);
+  const rows = Array.from(document.querySelectorAll('tr.zA')).slice(0, 15);
   for (const row of rows) {
-    if (!row.querySelector('.toxicity-status-icon') && !row.querySelector('.toxicity-loading-icon')) {
+    if (!row.querySelector('.toxicity-badge')) {
       await moderateRow(row);
       await delay(500);
     }
   }
 }
 
-// Listen for messages from the popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "runModerationCheck") {
     scanInboxSequential().then(() => {
       sendResponse({ result: "Moderation completed." });
     });
-    return true; // Async response
+    return true;
   }
 });
 
-// Observe inbox changes and rerun scan
 const observer = new MutationObserver(() => {
   scanInboxSequential();
 });
 observer.observe(document.body, { childList: true, subtree: true });
 
-// Initial scan on load
 scanInboxSequential();
+
+// === Optional: App badge hover style ===
+const css = `
+.toxicity-badge {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  cursor: default;
+  transition: background 0.19s, box-shadow 0.2s;
+}
+.toxicity-badge:hover {
+  filter: brightness(1.07) drop-shadow(0 2px 8px #fff4);
+  box-shadow: 0 2px 15px rgba(44,203,113,0.12), 0 1px 7px rgba(0,0,0,0.13);
+}
+`;
+const style = document.createElement('style');
+style.textContent = css;
+document.head.appendChild(style);
