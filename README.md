@@ -91,14 +91,14 @@ text
 
 ---
 ## 🎨 System Architecture
-<img width="1704" height="596" alt="Screenshot 2025-09-15 201910" src="https://github.com/user-attachments/assets/1a2b2b4e-c5de-481d-8e39-7eb0e62e6549" />
+<img width="600" height="596" alt="Screenshot 2025-09-15 201910" src="https://github.com/user-attachments/assets/1a2b2b4e-c5de-481d-8e39-7eb0e62e6549" />
 
 
 ## 🎨 Screenshots & Demo
 
-  <img width="1036" height="873" alt="Screenshot 2025-09-15 202506" src="https://github.com/user-attachments/assets/dbf276fa-c636-4751-8f43-e440a54c27d1" />
-  <img width="716" height="828" alt="Screenshot 2025-09-15 202730" src="https://github.com/user-attachments/assets/423bddfe-a3e9-44e7-b8ff-dcad5df16d20" />
-  <img width="1436" height="734" alt="Screenshot 2025-09-15 203631" src="https://github.com/user-attachments/assets/51997d2f-e22a-405d-9ff5-b7d63124c775" />
+  <img width="600" height="873" alt="Screenshot 2025-09-15 202506" src="https://github.com/user-attachments/assets/dbf276fa-c636-4751-8f43-e440a54c27d1" />
+  <img width="600" height="828" alt="Screenshot 2025-09-15 202730" src="https://github.com/user-attachments/assets/423bddfe-a3e9-44e7-b8ff-dcad5df16d20" />
+  <img width="600" height="734" alt="Screenshot 2025-09-15 203631" src="https://github.com/user-attachments/assets/51997d2f-e22a-405d-9ff5-b7d63124c775" />
 
 
 
@@ -118,3 +118,4 @@ Contributions and suggestions are welcome! Please open issues or submit pull req
 ---
 
 # Let's make the internet safe for everyone, starting with protecting women online
+
