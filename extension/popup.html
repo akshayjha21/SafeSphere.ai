@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -25,6 +25,44 @@
     </button>
     <button id="stopBtn">
       <span style="vertical-align:middle;margin-right:6px;">⛔</span>
+      Stop Moderation
+    </button>
+    <div id="statusMessage"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeSpace Lite</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup-container">
+    <h1>
+      <span class="logo-circle"></span>
+      SafeSpace Lite
+    </h1>
+    <p>
+      <span class="shield-emoji">🛡️</span> AI-powered content safety assistant.
+    </p>
+    <button id="checkEmailsBtn">
+      <span class="button-icon">📧</span>
+      Check Emails
+    </button>
+    <button id="checkCommentsBtn">
+      <span class="button-icon">💬</span>
+      Check Comments
+    </button>
+    <button id="checkImagesBtn">
+      <span class="button-icon">🖼️</span>
+      Check Images
+    </button>
+    <button id="stopBtn">
+      <span class="button-icon">⛔</span>
       Stop Moderation
     </button>
     <div id="statusMessage"></div>

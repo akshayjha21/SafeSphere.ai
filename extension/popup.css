@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(135deg, #232526, #414345);
   color: #e0e0e0;
@@ -77,6 +77,113 @@ button:hover {
   border-radius: 6px;
   padding: 6px 8px;
   box-shadow: 0 1px 6px rgba(0,191,165,0.11);
+  user-select: text;
+  word-break: break-word;
+} */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #232526, #414345);
+  color: #e0e0e0;
+  margin: 0;
+  padding: 18px 22px;
+  width: 320px;
+  min-height: 320px;
+  user-select: none;
+  letter-spacing: 0.03em;
+}
+
+.popup-container {
+  text-align: center;
+  padding-bottom: 12px;
+}
+
+.logo-circle {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  vertical-align: middle;
+  margin-right: 7px;
+  background: #00BFA5;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00BFA5;
+}
+
+.shield-emoji {
+  font-size: 16px;
+}
+
+.button-icon {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.toxicity-status-icon,
+.image-moderation-status-icon {
+  vertical-align: middle;
+  cursor: default;
+  box-shadow: 0 2px 6px rgba(0, 150, 136, 0.25);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  user-select: none;
+}
+
+h1 {
+  font-size: 23px;
+  margin-bottom: 10px;
+  color: #18ffff;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+p {
+  font-size: 15px;
+  margin-bottom: 24px;
+  color: #b2dfdb;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+button {
+  width: 90%;
+  background: linear-gradient(90deg, #00bfa5 0%, #009688 100%);
+  border: none;
+  color: white;
+  padding: 13px 0;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 11px 0;
+  transition: background 0.24s, box-shadow 0.23s;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 191, 165, 0.20);
+  outline: none;
+}
+
+button:focus {
+  box-shadow: 0 0 0 2px #00bfa5;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #009688 0%, #00bfa5 100%);
+  box-shadow: 0 6px 14px rgba(0, 191, 165, 0.25);
+}
+
+#statusMessage {
+  margin-top: 24px;
+  font-size: 15.5px;
+  font-weight: bold;
+  min-height: 28px;
+  color: #80cbc4;
+  background: rgba(30, 34, 36, 0.55);
+  border-radius: 6px;
+  padding: 6px 8px;
+  box-shadow: 0 1px 6px rgba(0, 191, 165, 0.11);
   user-select: text;
   word-break: break-word;
 }

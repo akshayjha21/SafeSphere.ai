@@ -1,8 +1,14 @@
 import Bytez from 'bytez.js';
 import redisClient from '../redisClient.js';
 import crypto from 'crypto';
+import dotenv from 'dotenv'
 
-const sdk = new Bytez('b4318c1eef32f2017b8a968d89ee95ea');
+dotenv.config({
+  path:'./.env'
+}
+)
+// console.log(process.env.Bytez_Key)
+const sdk = new Bytez(process.env.Bytez_Key);
 const model = sdk.model('mohsenfayyaz/toxicity-classifier');
 
 const MAX_RETRIES = 5;

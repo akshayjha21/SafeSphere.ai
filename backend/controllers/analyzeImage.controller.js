@@ -1,8 +1,16 @@
 // controllers/imageModerationController.js
 import axios from 'axios';
+import dotenv from 'dotenv'
 
-const API_USER = '672530004';       // your Sightengine API user
-const API_SECRET = 'Jn2ZVJUjhtbxYYrxrLgzeKfx8mq2ZJwe';  // your secret
+dotenv.config({
+  path:'./.env'
+}
+)
+
+// console.log( process.env.API_SECRET)
+const API_USER = process.env.API_USER       // your Sightengine API user
+const API_SECRET =process.env.API_SECRET;  // your secret
+
 
 const THRESHOLD = 0.3;  // minimum probability to flag a type as detected
 

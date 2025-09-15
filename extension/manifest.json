@@ -24,7 +24,7 @@
         "*://*.x.com/*",
         "*://*.facebook.com/*"
       ],
-      "js": ["contentScript_comments.js","contentScript.js"],
+      "js": ["contentScript_comments.js","contentScript.js","contentScript_image.js"],
       "run_at": "document_idle"
     },
     {
