@@ -105,7 +105,7 @@ function setCachedResult(text, result) {
 function isCacheValid(data) {
   if (!data || !data.cachedAt) return false;
   const ageMs = Date.now() - data.cachedAt;
-  return ageMs < 86400 * 1000; // 1 day
+  return ageMs < 300; // 1 day
 }
 
 async function moderateRow(row) {

@@ -3,44 +3,57 @@ body {
   background-color: #121212;
   color: #e0e0e0;
   margin: 0;
-  padding: 12px;
-  width: 260px;
+  padding: 16px 20px;
+  width: 280px;
+  user-select: none;
 }
 
 .popup-container {
   text-align: center;
+  padding-bottom: 8px;
 }
-/* Position icon nicely inside last td of email row */
+
 .toxicity-status-icon {
   vertical-align: middle;
   cursor: default;
-  box-shadow: 0 0 3px rgba(0,0,0,0.4);
+  box-shadow: 0 0 5px rgba(0, 150, 136, 0.8);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-left: 10px;
 }
 
 h1 {
-  font-size: 20px;
-  margin-bottom: 12px;
-  color: #009688;
+  font-size: 22px;
+  margin-bottom: 14px;
+  color: #00bfa5;
+  font-weight: 700;
 }
 
 button {
-  background-color: #009688;
+  background-color: #00bfa5;
   border: none;
   color: white;
-  padding: 10px 16px;
-  font-size: 14px;
-  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 15px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 12px;
+  margin-top: 16px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 191, 165, 0.4);
 }
 
 button:hover {
-  background-color: #00796b;
+  background-color: #009e88;
 }
 
 #statusMessage {
-  margin-top: 14px;
-  font-size: 14px;
+  margin-top: 18px;
+  font-size: 15px;
   font-weight: 600;
-  min-height: 24px;
+  min-height: 28px;
+  color: #80cbc4;
+  user-select: text;
 }
+npm
