@@ -2,7 +2,7 @@ import Bytez from 'bytez.js';
 import redisClient from '../redisClient.js';
 import crypto from 'crypto';
 
-const sdk = new Bytez('b4318c1eef32f2017b8a968d89ee95ea');
+const sdk = new Bytez();
 const model = sdk.model('mohsenfayyaz/toxicity-classifier');
 
 const MAX_RETRIES = 5;
